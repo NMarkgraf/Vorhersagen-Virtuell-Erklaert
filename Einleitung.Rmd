@@ -76,7 +76,7 @@ data.frame(hat_total_bill=lm_predict) %>%
 
 ## Evaluierung
 
-Sind die *wahren* Werte der Zielvariable bekannt, kann die Vorhersagegüte evaluiert werden:
+Sind die *wahren* Werte der Zielvariable (${\text{total_bill}}$) bekannt, kann die Vorhersagegüte evaluiert werden:
 
 ```{r echo=FALSE}
 tips_test %>%
