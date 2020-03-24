@@ -1,0 +1,88 @@
+---
+title: "Vorhersagemodellierung"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+library(mosaic)
+library(knitr)
+data(tips, package = "reshape2")
+set.seed(1896)
+tips_train <- tips %>%
+  sample_n(160) %>%
+  select(time, size, total_bill)
+
+tips_test <- tips %>%
+  sample_n(80) %>%
+  select(time, size, total_bill)
+
+tips_anwendung <- tips_test %>%
+  select(-total_bill)
+```
+
+## Aufgabenstellung
+
+- Modelliere die *abbhängige* Variable (Zielvariable) `total.bill` 
+
+- auf Basis der *unabhängigen* Variabken `time` und `size`:
+
+- $y=f(x_1,x_2)+\epsilon$
+
+## Trainingsdaten
+
+Dieser Datensatz (`tips_train`) enthält alle Variablen, d.h. $x_1, x_2, y$:
+
+```{r echo=FALSE}
+tips_train %>%
+  head(4) %>%
+  kable()
+```
+
+## Modellierung
+
+z.B. über lineare Regression:
+
+```{r}
+erg_lm <- lm(total_bill ~ size + time, data = tips_train)
+erg_lm
+```
+## Anwendungsdaten
+
+Diese enthalten die Zielvariable $y$ nicht:
+
+```{r echo=FALSE}
+tips_anwendung %>%
+  head(4) %>%
+  kable()
+```
+
+## Vorhersage
+
+Zuvor gelerntes Modell (`erg_lm`) auf Basis der Trainingsdaten (`tips_train`) zur Prognose der Zielvariable `total_bill` der Anwendungsdaten (`tips_anwendung`) verwenden:
+
+```{r}
+lm_predict <- predict(erg_lm, newdata = tips_anwendung)
+```
+
+## Ergebnis Vorhersage
+
+Für die Beobachtungen des Anwendungsdatensatzes gibt es jetzt geschätze Werte für die Rechnungshöhe, $\widehat{\text{total_bill}}$:
+
+```{r echo=FALSE}
+data.frame(total_bill=lm_predict) %>%
+  head(4) %>%
+  kable()
+```
+
+## Evaluierung
+
+Sind die *wahren* Werte der Zielvariable bekannt, kann die Vorhersagegüte evaluiert werden:
+
+```{r echo=FALSE}
+tips_test %>%
+  mutate(hat_total_bill = lm_predict) %>%
+  head(4) %>%
+  kable()
+```
+
+
