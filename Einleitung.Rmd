@@ -22,9 +22,9 @@ tips_anwendung <- tips_test %>%
 
 ## Aufgabenstellung
 
-- Modelliere die *abbhängige* Variable (Zielvariable) `total.bill` 
+- Modelliere die *abbhängige* Variable (Zielvariable) `total.bill` ($y$) 
 
-- auf Basis der *unabhängigen* Variabken `time` und `size`:
+- auf Basis der *unabhängigen* Variabken `time` und `size` ($x_1, x_2$):
 
 - $y=f(x_1,x_2)+\epsilon$
 
@@ -43,12 +43,12 @@ tips_train %>%
 z.B. über lineare Regression:
 
 ```{r}
-erg_lm <- lm(total_bill ~ size + time, data = tips_train)
+erg_lm <- lm(total_bill ~ time + size, data = tips_train)
 erg_lm
 ```
 ## Anwendungsdaten
 
-Diese enthalten die Zielvariable $y$ nicht:
+Diese (`tips_anwendung`) enthalten die Zielvariable $y$ nicht:
 
 ```{r echo=FALSE}
 tips_anwendung %>%
@@ -69,7 +69,7 @@ lm_predict <- predict(erg_lm, newdata = tips_anwendung)
 Für die Beobachtungen des Anwendungsdatensatzes gibt es jetzt geschätze Werte für die Rechnungshöhe, $\widehat{\text{total_bill}}$:
 
 ```{r echo=FALSE}
-data.frame(total_bill=lm_predict) %>%
+data.frame(hat_total_bill=lm_predict) %>%
   head(4) %>%
   kable()
 ```
