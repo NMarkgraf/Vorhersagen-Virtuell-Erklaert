@@ -24,7 +24,7 @@ tips_anwendung <- tips_test %>%
 
 - Modelliere die *abbhängige* Variable (Zielvariable) `total.bill` ($y$) 
 
-- auf Basis der *unabhängigen* Variabken `time` und `size` ($x_1, x_2$):
+- auf Basis der *unabhängigen* Variablen `time` und `size` ($x_1, x_2$):
 
 - $y=f(x_1,x_2)+\epsilon$
 
@@ -87,7 +87,7 @@ tips_test %>%
 
 ## Vorhersagevergleich
 
-- Je nach dem, welche Variablen zur Modellierung verwendet werden, ergeben sich i.d.R. verschiedene Prognosen: `lm(y ~ 1); lm(y ~ x1); lm(y ~ x1 + x2); lm (y ~ x1 * x2)`
+- Je nachdem, welche Variablen zur Modellierung verwendet werden, ergeben sich i.d.R. verschiedene Prognosen: `lm(y ~ 1); lm(y ~ x1); lm(y ~ x1 + x2); lm (y ~ x1 * x2)`
 
 - Werden im Trainingsdatensatz Ausreißer eliminiert ändert sich das geschätzte Modell und damit die Prognose.
 
